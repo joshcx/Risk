@@ -20,20 +20,42 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <!-- Contains the code to draw and handle logic for the gameboard -->
     <script src="gameLogic.js"></script>
+    
   </head>
   <body>
 
     <div class="container">
-    <div id="titleBanner">
-        <h1>Risk: The Game of Global Domination</h1>
-    </div>
-    <div id="board">
-    <canvas id="boardCanvas" width="600" height="400"></canvas>
-    </div>
 
-     <div id="buttonRow">
-        <span class="button" id="playButton"><p>Play</p></span>
-        <span class="button" data-toggle="modal" data-target="#tutorialModal" id="tutorialButton"><p>Tutorial</p></span>
+        <div class="row">
+            <div id="titleBanner" class="col-xs-12">
+                <h1>Risk: The Game of Global Domination</h1>
+            </div>
+        </div>
+
+        <div class="row">
+            <div id="board" class="col-xs-12">
+            <!-- <canvas id="boardCanvas" width="600" height="400"></canvas> -->
+                <img id="map" class="col-xs-12" src="worldmap.jpg" alt="worldmap">
+                <!-- <div class="col-xs-12"> -->
+                    <div id="northAmerica" class="territory"><p class="troops">0</p></div>
+                    <div id="southAmerica" class="territory"><p class="troops">0</p></div>
+                    <div id="africa" class="territory"><p class="troops">0</p></div>
+                    <div id="europe" class="territory"><p class="troops">0</p></div>
+                    <div id="asia" class="territory"><p class="troops">0</p></div>
+                    <div id="australia" class="territory"><p class="troops">0</p></div>    
+                <!-- </div> -->
+                
+            </div>
+        </div>
+        <div class="row">
+            <!-- <span class="button" id="playButton"><p>Play</p></span> -->
+            <!-- <span class="button" data-toggle="modal" data-target="#tutorialModal" id="tutorialButton"><p>Tutorial</p></span> -->
+            <div class="btn-container col-xs-12">
+                <button id="playButton" class="btn btn-default btn-lg">Play</button>
+                <button id="tutorialButton" class="btn btn-default btn-lg" data-toggle="modal" data-target="#tutorialModal">Tutorial</button>
+            </div>
+        </div>
+        
         <div id="tutorialModal" class="modal fade" role="dialog">
           <div class="modal-dialog">
             <div class="modal-content">
@@ -50,13 +72,17 @@
             </div>
           </div>
         </div>
+
     </div>
+    <script src="deploy.js"></script>
     <script>
         $(document).ready(function() {
+            // $('#playButton').click(function(){
+            //     $('.territory').show();
+            // });
             var canvas = document.getElementById('boardCanvas');
             drawContinents(canvas);
         });
     </script>
-    </div> <!-- /container -->
   </body>
 </html>
