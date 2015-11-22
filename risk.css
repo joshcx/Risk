@@ -1,29 +1,4 @@
-#playButton {
-    position: fixed;
-    bottom: 250px;
-    right: 70px; 
-}
-
-#tutorialButton {
-    position: fixed;
-    bottom: 150px;
-    right: 50px; 
-}
-
-#websiteButton {
-    position: fixed;
-    bottom: 50px;
-    right: 50px; 
-}
-
-
 body {
-    background-image: url("http://dev.filkor.org/images/risk/risk-colored-small.jpg");
-    background-repeat: no-repeat;
-    background-position: left;
-    background-attachment: fixed;
-    background-size: 1050px 500px;
-    background-color: #74888F;
     font-family: 'pictos';
 }
 h1,
@@ -158,4 +133,7 @@ span:hover>p {
     transform: translateY(4px);
 }
 
-
+#boardCanvas{
+    border:solid black 5px;
+    border-radius: 3px;
+}

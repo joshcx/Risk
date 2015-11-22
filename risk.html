@@ -5,81 +5,58 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-
     <title>Risk</title>
-
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <!-- Optional Bootstrap theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
-
     <!-- Custom styles for this template -->
     <link href="risk.css" rel="stylesheet">
-    <link href="tutorial.css" rel="stylesheet">
 
     <!-- Bootstrap core JavaScript-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    
-
+    <!-- Contains the code to draw and handle logic for the gameboard -->
+    <script src="gameLogic.js"></script>
   </head>
-
-
   <body>
 
     <div class="container">
-      <h1>Risk: The Game of Global Domination</h1>
+    <div id="titleBanner">
+        <h1>Risk: The Game of Global Domination</h1>
+    </div>
+    <div id="board">
+    <canvas id="boardCanvas" width="600" height="400"></canvas>
+    </div>
 
-      
+     <div id="buttonRow">
         <span class="button" id="playButton"><p>Play</p></span>
-        <span class="button" id="tutorialButton"><p>Tutorial</p></span>
-        <span class="button" id="websiteButton"><p>Website</p></span>
-
-        <div id="id01" class="modal">
+        <span class="button" data-toggle="modal" data-target="#tutorialModal" id="tutorialButton"><p>Tutorial</p></span>
+        <div id="tutorialModal" class="modal fade" role="dialog">
           <div class="modal-dialog">
             <div class="modal-content">
-              <header class="container"> 
-                <a href="#" class="closebtn">×</a>
-                <h2>Here's how it works</h2>
-              </header>
-              <div class="container">
-                <p>Risk is a turn-based game for two to six players. The standard version is played on a board depicting a political map of the Earth, divided into forty-two territories, which are grouped into six continents. The object of the game is to occupy every territory on the board and in doing so, eliminate the other players. Players control armies with which they attempt to capture territories from other players, with results determined by dice rolls.</p>
-              </div>
-              <footer class="container">
-              <p>Tutorial</p>
-              </footer>
+				<div class="modal-header"> 
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h2 class="modal-title">Here's how it works</h2>
+				</div>
+                <div class="modal-body">
+					<p>Risk is a turn-based game for two to six players. The standard version is played on a board depicting a political map of the Earth, divided into forty-two territories, which are grouped into six continents. The object of the game is to occupy every territory on the board and in doing so, eliminate the other players. Players control armies with which they attempt to capture territories from other players, with results determined by dice rolls.</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
             </div>
           </div>
         </div>
-
-      <script>
-
-
-
-        $(document).ready(function() { // callback 1
-        
-          $("#tutorialButton").on('click', function() { // callback 2
-              $("#id01").modal();
-          });
-
-          $("#playButton").on('click', function() { // callback 2
-              alert("This feature hasn't been implemented yet.");
-          });
-
-          $("#websiteButton").on('click', function() { // callback 2
-              alert("This feature hasn't been implemented yet.");
-          });
-
-
-          
-
-
+    </div>
+    <script>
+        $(document).ready(function() {
+            var canvas = document.getElementById('boardCanvas');
+            drawContinents(canvas);
         });
-        
-      </script>
+    </script>
     </div> <!-- /container -->
-
   </body>
 </html>
