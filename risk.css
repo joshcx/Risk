@@ -4,7 +4,7 @@ body {
 h1,
 h2,
 h3,
-H4 {
+h4 {
     font-family: helvetica;
     font-weight: bold;
     background-color: #333;
@@ -136,4 +136,66 @@ span:hover>p {
 #boardCanvas{
     border:solid black 5px;
     border-radius: 3px;
+}
+
+
+
+#board{
+    position:relative;
+}
+#map{
+    padding: 0;
+}
+.territory{
+    width: 50px;
+    height: 50px;
+    background-color: white;
+    -moz-border-radius: 20px;
+    -webkit-border-radius: 20px;
+    border-radius: 50px;
+    position: absolute;
+    z-index: 1;
+    display: none;
+}
+.territory:hover{
+    background-color: yellow;
+}
+.troops{
+    position: absolute;
+    left: 43%;
+    top:32%;
+    color: white;
+}
+#northAmerica{
+    left: 15%;
+    top: 25%;
+    background-color: blue;
+}
+#southAmerica{
+    left: 24%;
+    top: 65%;
+    background-color: blue;
+}
+#africa{
+    left: 46%;
+    top: 62%;
+    background-color: blue;
+}
+#europe{
+    left: 47%;
+    top: 31%;
+    background-color: red;
+}
+#asia{
+    left: 69%;
+    top:27%;
+    background-color: red;
+}
+#australia{
+    left: 82%;
+    top: 83%;
+    background-color: red;
+}
+.btn-container{
+    margin-top: 30px;
 }
