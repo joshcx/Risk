@@ -26,7 +26,7 @@ h4 {
     position: relative;
     /*box-shadow*/
     -webkit-box-shadow: 0px 0px 1px 0px rgba(0,0,0,1), 0px 3px 15px 2px rgba(0,0,0,1);
-    -moz-box-shadow: 0px 0px 1px 0px rgba(0,0,0,1), 0px 3px 15px 2px rgba(0,0,0,1);
+    -moz-box-shadow: 0px 0px 1px 0px rgba(0,0,0,1), 0px 3px 15px 2px rgba(0,0,0,1)
     box-shadow: 0px 0px 1px 0px rgba(0,0,0,1), 0px 3px 15px 2px rgba(0,0,0,1);
     border: 1px solid #5c5c5c;
     border-top: 1px solid #999;
@@ -139,7 +139,43 @@ span:hover>p {
 }
 
 
-
+.message{
+    font-weight: bold;
+    position: absolute;
+    left: 43%;
+    display: none;
+}
+.player{
+    position: absolute;
+    display: none;
+}
+#player1{
+    left: 2.3%;
+    top: 70%;
+}
+#player2{
+    left: 2.3%;
+    top: 75%;
+}
+.icon{
+    font-size: 4.5rem;
+    position: absolute;
+    display: none;
+}
+.glyphicon-arrow-left{
+    left: 2%;
+}
+.glyphicon-arrow-right{
+    right: 2%;
+}
+.glyphicon-plus{
+    top: 81%;
+    left: 2%;
+}
+.glyphicon-minus{
+    top: 89%;
+    left: 1.7%;
+}
 #board{
     position:relative;
 }

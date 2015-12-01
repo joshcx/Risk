@@ -37,16 +37,26 @@
             <!-- <canvas id="boardCanvas" width="600" height="400"></canvas> -->
                 <img id="map" class="col-xs-12" src="worldmap.jpg" alt="worldmap">
                 <!-- <div class="col-xs-12"> -->
-                    <div id="northAmerica" class="territory"><p class="troops">0</p></div>
-                    <div id="southAmerica" class="territory"><p class="troops">0</p></div>
-                    <div id="africa" class="territory"><p class="troops">0</p></div>
-                    <div id="europe" class="territory"><p class="troops">0</p></div>
-                    <div id="asia" class="territory"><p class="troops">0</p></div>
-                    <div id="australia" class="territory"><p class="troops">0</p></div>    
+                    <h2 class="message">Place your troops!</h2>
+
+                    <div id="northAmerica" class="territory p1"><p class="troops">0</p></div>
+                    <div id="southAmerica" class="territory p1"><p class="troops">0</p></div>
+                    <div id="africa" class="territory p1"><p class="troops">0</p></div>
+                    <div id="europe" class="territory p2"><p class="troops">0</p></div>
+                    <div id="asia" class="territory p2"><p class="troops">0</p></div>
+                    <div id="australia" class="territory p2"><p class="troops">0</p></div>
+
+                    <h3 id="player1" class="player">Player1<span>20</span></h3>
+                    <h3 id="player2" class="player">Player2<span>20</span></h3>
+
+                    <span class="glyphicon glyphicon-arrow-left icon"></span>
+                    <span class="glyphicon glyphicon-arrow-right icon"></span>
+                    <span id="plusButton" class="glyphicon glyphicon-plus icon"></span>
+                    <span id="minusButton" class="glyphicon glyphicon-minus icon"></span>
                 <!-- </div> -->
-                
             </div>
         </div>
+
         <div class="row">
             <!-- <span class="button" id="playButton"><p>Play</p></span> -->
             <!-- <span class="button" data-toggle="modal" data-target="#tutorialModal" id="tutorialButton"><p>Tutorial</p></span> -->
@@ -72,17 +82,7 @@
             </div>
           </div>
         </div>
-
     </div>
     <script src="deploy.js"></script>
-    <script>
-        $(document).ready(function() {
-            // $('#playButton').click(function(){
-            //     $('.territory').show();
-            // });
-            var canvas = document.getElementById('boardCanvas');
-            drawContinents(canvas);
-        });
-    </script>
   </body>
 </html>
