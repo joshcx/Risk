@@ -142,7 +142,7 @@ span:hover>p {
 .message{
     font-weight: bold;
     position: absolute;
-    left: 43%;
+    left: 40%;
     display: none;
 }
 .player{
@@ -198,8 +198,9 @@ span:hover>p {
 }
 .troops{
     position: absolute;
-    left: 43%;
-    top:32%;
+    top: 28%;
+    text-align: center;
+    width: 50px;
     color: white;
 }
 #northAmerica{

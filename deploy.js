@@ -1,13 +1,18 @@
+var prevState;
 var gameplay = {
-
+	player : "player1",
+	clicked: "",
+	deployable: "",
+	totalDeployable: 20
 }
 $('#playButton').click(function(){
-	$('.territory').show();
+	$('.territory').css('display','block');
 	$('.message').show();
 	$('.icon').show();
 	$('.player').show();
+	$('#playButton').off();
+
 	$('#player1').css('color', 'blue');
-	gameplay.player = "player1";
 });
 $('.territory').click(function(){
 	if(gameplay.player == "player1"){
@@ -23,23 +28,58 @@ $('.territory').click(function(){
 		}
 	}
 	gameplay.clicked = $("#"+this.id+" p");
-	gameplay.deployed = $("#"+gameplay.player+" span");
+	gameplay.deployable = $("#"+gameplay.player+" span");
 });
 $('#plusButton').click(function(){
-	var tmp = gameplay.clicked.text();
-	tmp++;
-	gameplay.clicked.text(tmp);
-
-	tmp = parseInt(gameplay.deployed.text());
-	tmp--;
-	gameplay.deployed.text(tmp);
+	var anArmy = gameplay.clicked.text();
+	var totalArmy = parseInt(gameplay.deployable.text());
+	if(totalArmy > 0){
+		anArmy++;
+		gameplay.clicked.text(anArmy);
+	
+		totalArmy--;
+		gameplay.deployable.text(totalArmy);	
+	}
+	else{
+		alert("You have deployed all the troops!");
+	}
+	
 });
 $('#minusButton').click(function(){
-	var tmp = gameplay.clicked.text();
-	tmp--;
-	gameplay.clicked.text(tmp);
-
-	tmp = parseInt(gameplay.deployed.text());
-	tmp++;
-	gameplay.deployed.text(tmp);
+	var anArmy = gameplay.clicked.text();
+	var totalArmy = parseInt(gameplay.deployable.text());
+	if(totalArmy < gameplay.totalDeployable){
+		anArmy--;
+		gameplay.clicked.text(anArmy);
+	
+		totalArmy++;
+		gameplay.deployable.text(totalArmy);	
+	}
+	else{
+		alert("You don't have any more troops to take out!");	
+	}
+});
+$('#player1').click(function(){
+	gameplay.player = "player1";
+	gameplay.clicked = null;
+	gameplay.deployable = null;
+	$('#player1').css('color', 'blue');
+	$('#player2').css('color', 'black');
+});
+$('#player2').click(function(){
+	gameplay.player = "player2";
+	gameplay.clicked = null;
+	gameplay.deployable = null;
+	$('#player2').css('color', 'red');
+	$('#player1').css('color', 'black');
+});
+$('#nextButton').click(function(){
+	var p1Deployable = parseInt($('#player1 span').text());
+	var p2Deployable = parseInt($('#player2 span').text());
+	if(p1Deployable > 0 && p2Deployable > 0){
+		alert("You didn't deploy all the troops yet!");
+		return;
+	}
+	prevState = $('body').clone();
+	battleSetup();
 });
