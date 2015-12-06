@@ -63,9 +63,12 @@
         svg.appendChild( label );
         hilite = doc.getElementById( "hilite" );
         countries = document.getElementsByClassName('country');
+        var country;
         for (var i = 0; i < countries.length; i++)
         {
-          var country = countries[i];
+          country = countries[i];
+          country.troops = 0;
+          country.owner = 'None';
           country.addEventListener('click', function(evt){ 
             clickCountry(evt);
           });
@@ -111,7 +114,7 @@
         var country = evt.target;
         var outline = country.getAttribute( 'd' );
         hilite.setAttribute( 'd', outline );
-        text.textContent = country.getAttribute( 'id' );
+        text.textContent = country.getAttribute( 'id' ) +' Owner: ' +country.owner +' Troops: ' + country.troops;
         selected = country;
       }
     ]]>
