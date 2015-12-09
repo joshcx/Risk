@@ -5,14 +5,10 @@ var gameplay = {
 	deployable: "",
 	totalDeployable: 20
 }
-$('#playButton').click(function(){
-	$('.territory').css('display','block');
-	$('.message').show();
-	$('.icon').show();
-	$('.player').show();
+$('#playButton').click(function(evt){
 	$('#playButton').off();
 
-	$('#player1').css('color', 'blue');
+	init(evt);
 });
 $('.territory').click(function(){
 	if(gameplay.player == "player1"){

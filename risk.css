@@ -56,10 +56,10 @@ p,
     transition: all .2s ease;
 	cursor: pointer;
 }
-span:hover>p {
+/*span:hover>p {
     color: #00aeff;
     text-shadow: -1px -2px 1px #000;
-}
+}*/
 .button {
     display: block;
     float: left;
