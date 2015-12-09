@@ -35,6 +35,21 @@ function init( evt )
       $('#clicked').attr('d', d);
     });
   });
+
+  function addText(p) {
+    var t = document.createElementNS("http://www.w3.org/2000/svg", "text");
+    var b = p.getBBox();
+    t.setAttribute("transform", "translate(" + (b.x + b.width/2) + " " + (b.y + b.height/2) + ")");
+    t.textContent = "counter";
+    t.setAttribute("stroke", "black");
+    t.setAttribute("font-size", "14");
+    p.parentNode.insertBefore(t, p.nextSibling);
+  }
+
+  var paths = document.querySelectorAll("path");
+    for (var p in paths) {
+    addText(paths[p])
+  }
   // $('.country').on({
   //     mouseover: function(){
   //       var tmp = $(this).attr('d');
