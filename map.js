@@ -1,4 +1,11 @@
 var countries = new Array();
+$('#playButton').click(function(evt){
+  $('#playButton').hide();
+  $('#tutorialButton').hide();
+  $('.countryMsg').show();
+
+  init();
+});
 function init()
 {
   $(".country").each(function(){
@@ -23,9 +30,9 @@ function init()
   });
   $('#hovering').click(function(e){
     var countryId = $(this).attr('name');
-    var c = countries[countryId];
-    c[2]++;
-    document.getElementById(countryId+"text").textContent=c[2];
+    // var c = countries[countryId];
+    // c[2]++;
+    // document.getElementById(countryId+"text").textContent=c[2];
     var d = $(this).attr('d');
     $('#clicked').attr('d', d);
     $('#country1').text(countries[countryId][0] + " | Owner: " + countries[countryId][1] + " | Troops: " + countries[countryId][2]);
@@ -38,30 +45,31 @@ function init()
       $('#country2').text("Hover on a country");
     });
   });
+  
   //  addText for all countries should go here
-    console.log("test");
-    var paths = document.querySelectorAll(".country");
-    for (var p in paths) {
-      addText(paths[p], 1);
-    }
-  // update counter display inside country
-  function addText(p, count) {
-    var t = document.createElementNS("http://www.w3.org/2000/svg", "text");
-    var b = p.getBBox();
-    //b.select(t).remove();
-    //console.log(p.getAttribute('id'));
-    //t.setAttribute("id", p.getAttribute('id'));
-    t.setAttribute("transform", "translate(" + (b.x + b.width/2) + " " + (b.y + b.height/2) + ")");
-    t.textContent = countries[p.id][2];
-    t.setAttribute("stroke", "black");
-    t.setAttribute("font-size", "16");
-    t.setAttribute("id", p.getAttribute("id")+"text");
+  
+  //   var paths = document.querySelectorAll(".country");
+  //   for (var p in paths) {
+  //     addText(paths[p], 1);
+  //   }
+  // // update counter display inside country
+  // function addText(p, count) {
+  //   var t = document.createElementNS("http://www.w3.org/2000/svg", "text");
+  //   var b = p.getBBox();
+  //   //b.select(t).remove();
+  //   //console.log(p.getAttribute('id'));
+  //   //t.setAttribute("id", p.getAttribute('id'));
+  //   t.setAttribute("transform", "translate(" + (b.x + b.width/2) + " " + (b.y + b.height/2) + ")");
+  //   t.textContent = countries[p.id][2];
+  //   t.setAttribute("stroke", "black");
+  //   t.setAttribute("font-size", "16");
+  //   t.setAttribute("id", p.getAttribute("id")+"text");
 
-    // var text = document.createTextNode("Hi");
-    p.parentNode.insertBefore(t, p.nextSibling);
-    //countries[p.getAttribute('id')][3] = t;
-    // b.select(t).remove();
-  }
+  //   // var text = document.createTextNode("Hi");
+  //   p.parentNode.insertBefore(t, p.nextSibling);
+  //   //countries[p.getAttribute('id')][3] = t;
+  //   // b.select(t).remove();
+  // }
 }
 
  

@@ -5,13 +5,31 @@ var gameplay = {
 	deployable: "",
 	totalDeployable: 20
 }
-$('#playButton').click(function(evt){
-	$('#playButton').hide();
-	$('#tutorialButton').hide();
-	$('.countryMsg').show();
 
-	init();
-});
+function selectTerritories(){
+	$('#titleBanner h1').text("Player1, select a territory you wish to rule");
+	var turn = true;
+	var count = 40;
+	$('#hovering').click(function(evt){
+		evt.preventDefault();
+		var countryId = $(this).attr('name');
+		if(turn == true){
+			countries[countryId][1] = "Player1";
+			
+			turn = false;
+		}
+		else{
+			countries[countryId][1] = "Player2";
+			turn = true;
+		}
+		--count;
+		if(count == 0){
+			$('#hovering').off('click');
+		}
+	});
+
+}
+
 $('.territory').click(function(){
 	if(gameplay.player == "player1"){
 		if($(this).hasClass('p2')){
