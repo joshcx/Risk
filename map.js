@@ -18,13 +18,14 @@ function init()
   $(".country").each(function(){
     $(this).on({  
       mouseover: function(e){
-        
+     
         var countryId = e.target.getAttribute('id');
-
         var d = $(this).attr('d');
         $('#hovering').attr('d', d);
         $('#hovering').attr('name', countryId);
 		if(firstCountry){
+			$('#attack').removeAttr('d');
+			$('#attack').attr('name', countryId);
 			$('#country2').text(countries[countryId][0] + " | Owner: " + countries[countryId][1] + " | Troops: " + countries[countryId][2] + " | Attackable: " + attackable(firstCountry, countryId));
 			if(attackable(firstCountry, countryId)){
 				$('#attack').attr('d', d);
@@ -35,8 +36,9 @@ function init()
       } 
     });
   });
-
+  
   $('#hovering').click(function(e){
+	
     var countryId = $(this).attr('name');
 	var c = countries[countryId];
 	c[2]++;
@@ -47,8 +49,11 @@ function init()
 		$('#clicked').attr('d', d);
 	}
 	else{
-		secondCountry = countryId;
-		$('#clicked2').attr('d', d);
+		if(countryId != firstCountry){
+			secondCountry = countryId;
+			$('#attack').removeAttr('d');
+			$('#clicked2').attr('d', d);
+		}
 	}
     $('#country1').text(countries[countryId][0] + " | Owner: " + countries[countryId][1] + " | Troops: " + countries[countryId][2]);
   });
@@ -61,19 +66,33 @@ function init()
 	}
 	});
     $(this).click(function(){
-	  if(secondCountry){
-		  secondCountry = null;
-		  $('#clicked2').removeAttr('d');
-	  }
-	  else{
-		  firstCountry = null;
-		  $('#clicked').removeAttr('d');
-	  }
+		if(secondCountry){
+			secondCountry = null;
+			$('#clicked2').removeAttr('d');
+		}
+		else{
+			firstCountry = null;
+			$('#attack').removeAttr('d');
+			$('#clicked').removeAttr('d');
+			secondCountry = null;
+			$('#clicked2').removeAttr('d');
+		}
       $('#hovering').removeAttr('d');
       $('#country1').text("Click on a country");
       $('#country2').text("Hover on a country");
     });
   });
+  
+  $('#attack').click(function(e){
+	var countryId = $(this).attr('name');
+	if(countryId != firstCountry){
+		var d = $(this).attr('d');
+		secondCountry = countryId;
+		$('#attack').removeAttr('d');
+		$('#clicked2').attr('d', d);
+	}
+  });
+  
   //  addText for all countries should go here
     console.log("test");
     var paths = document.querySelectorAll(".country");
@@ -123,7 +142,6 @@ function init()
 		return 'player1';
   }
 }
-
 
 // generic function to create an xml element
 // format for attr is very strict
