@@ -1,3 +1,16 @@
+$('#playButton').click(function(evt){
+  $('#playButton').hide();
+  $('#tutorialButton').hide();
+  $('#titleBanner h1').text("Player1, select a territory you wish to rule");
+
+  $('.pText').show();
+  $('.icon').show();
+  $('.countryMsg').show();
+
+  init();
+  attackPhase();
+});
+
 var prevState;
 var gameplay = {
 	player : "player1",
@@ -6,29 +19,38 @@ var gameplay = {
 	totalDeployable: 20
 }
 
-function selectTerritories(){
-	$('#titleBanner h1').text("Player1, select a territory you wish to rule");
-	var turn = true;
-	var count = 40;
-	$('#hovering').click(function(evt){
-		evt.preventDefault();
-		var countryId = $(this).attr('name');
-		if(turn == true){
-			countries[countryId][1] = "Player1";
-			
-			turn = false;
-		}
-		else{
-			countries[countryId][1] = "Player2";
-			turn = true;
-		}
-		--count;
-		if(count == 0){
-			$('#hovering').off('click');
-		}
-	});
-
+function addTroops(name){
+	++countries[name][2];
+	document.getElementById(name+"text") = countries[name][2];
 }
+function removeTroops(name){
+	--countries[name][2];
+	document.getElementById(name+"text") = countries[name][2];
+}
+
+// function selectTerritories(){
+// 	$('#titleBanner h1').text("Player1, select a territory you wish to rule");
+// 	var turn = true;
+// 	var count = 40;
+// 	$('#hovering').click(function(evt){
+// 		evt.preventDefault();
+// 		var countryId = $(this).attr('name');
+// 		if(turn == true){
+// 			countries[countryId][1] = "Player1";
+			
+// 			turn = false;
+// 		}
+// 		else{
+// 			countries[countryId][1] = "Player2";
+// 			turn = true;
+// 		}
+// 		--count;
+// 		if(count == 0){
+// 			$('#hovering').off('click');
+// 		}
+// 	});
+
+// }
 
 $('.territory').click(function(){
 	if(gameplay.player == "player1"){

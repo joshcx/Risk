@@ -138,6 +138,11 @@ p,
     border-radius: 3px;
 }
 
+
+
+#titleBanner h1{
+    text-align: center;
+}
 .message{
     font-weight: bold;
     position: absolute;
@@ -161,19 +166,30 @@ p,
     position: absolute;
     display: none;
 }
-.glyphicon-arrow-left{
-    left: 2%;
+.pText{
+    font-size: 2rem;
+    position: absolute;
+    display: none;
 }
-.glyphicon-arrow-right{
-    right: 2%;
+#p1Text{
+    top: 57%;
+    left: 3%;
+}
+#p2Text{
+    top: 60%;
+    left: 3%;
 }
 .glyphicon-plus{
-    top: 81%;
+    top: 63%;
     left: 2%;
 }
 .glyphicon-minus{
-    top: 89%;
+    top: 70%;
     left: 1.7%;
+}
+.glyphicon-ok{
+    top: 77%;
+    left: 2%;
 }
 .countryMsg{
     font-size: 3rem;
