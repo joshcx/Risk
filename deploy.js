@@ -1,7 +1,7 @@
 $('#playButton').click(function(evt){
-	$('#playButton').hide();
-	$('#tutorialButton').hide();
-	$('.countryMsg').show();
+	$('#btn-container').hide();
+    $('#gameInterface').show();
+    $('#roundInfo').text("Reinforce Phase for Player 1");
 
 	init();
 });

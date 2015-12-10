@@ -176,9 +176,15 @@ p,
     left: 1.7%;
 }
 .countryMsg{
-    font-size: 3rem;
-    display: none;
+    font-size: 2rem;
 }
 #country2{
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
+}
+#roundInfo{
+    font-size: 2rem;
+}
+
+#gameInterface{
+    display: none;
 }
