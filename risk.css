@@ -19,7 +19,7 @@ h4 {
 .pane {
     display: block;
     width: 520px;
-	text-align: center;
+    text-align: center;
     height: 260px;
     padding: 10px;
     margin: 20px auto;
@@ -54,7 +54,7 @@ p,
     -moz-transition: all .2s ease;
     -o-transition: all .2s ease;
     transition: all .2s ease;
-	cursor: pointer;
+    cursor: pointer;
 }
 /*span:hover>p {
     color: #00aeff;
@@ -172,13 +172,52 @@ p,
     display: none;
 }
 #p1Text{
+<<<<<<< Updated upstream
     top: 57%;
     left: 3%;
 }
 #p2Text{
     top: 60%;
+=======
+    top: 45%;
+>>>>>>> Stashed changes
     left: 3%;
 }
+#p1Text2{
+    top: 49%;
+    left: 3%;
+}
+
+#p2Text{
+    top: 54%;
+    left: 3%;
+}
+
+#p2Text2{
+    top: 58%;
+    left: 3%;
+}
+
+#p1TotalTroops{
+    top: 45%;
+    left: 14%;
+}
+
+#p1TroopsLeft {
+    top:49%;
+    left:21%;
+}
+
+#p2TotalTroops{
+    top: 54%;
+    left:14%;
+}
+
+#p2TroopsLeft {
+    top:58%;
+    left:21%;
+}
+
 .glyphicon-plus{
     top: 63%;
     left: 2%;

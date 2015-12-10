@@ -5,6 +5,7 @@ var numPlayers = 2;
 var startingTroops = 42; //Must be at least 42 for randomization and even for fairness.
 var firstCountry = null; //for clicked countries
 var secondCountry = null;
+<<<<<<< Updated upstream
 
 function init()
 {
@@ -21,6 +22,25 @@ function init()
     countries[countryId][0] = countryId;
     countries[countryId][1] = "None";
     countries[countryId][2] = 0;
+=======
+var turn;
+var count;
+function init()
+{
+	players = {'player1': {'troops': startingTroops, 'countriesHeld':0}, 'player2':{'troops': startingTroops, 'countriesHeld':0}};
+	turn = "player1"; // remove later: testing purposes
+	count = 0; // remove later: testing purposes
+
+	updateAllTroopCounts();
+
+  $(".country").each(function(){
+    var countryId = this.getAttribute('id');
+	//alert(countryId);
+    countries[countryId] = new Array();
+    countries[countryId][0] = countryId; // country name
+    countries[countryId][1] = "None"; // owner of country
+    countries[countryId][2] = 1; // num of troops
+>>>>>>> Stashed changes
   });
 
   $(".country").each(function(){
@@ -38,12 +58,27 @@ function init()
   
   $('#hovering').click(function(e){
 	
+<<<<<<< Updated upstream
     var countryId = $(this).attr('name');
 
     // var c = countries[countryId];
     // c[2]++;
     // document.getElementById(countryId+"text").textContent=c[2];
 
+=======
+    var countryId = $(this).attr('name'); // get country name
+    /*
+    console.log("count = " + count);
+    if ((count % 2) == 0) {
+		fortifyTroops(turn, countryId, "plus");
+	}
+	else	
+		fortifyTroops(turn, countryId, "minus");
+	count++;
+	*/
+	reinforceTroops(turn, countryId);
+	
+>>>>>>> Stashed changes
     var d = $(this).attr('d');
     $('#clicked').attr('d',d);
   	// if(firstCountry == null){
@@ -104,13 +139,14 @@ function init()
     var paths = document.querySelectorAll(".country");
     for (var p in paths) {
 		var player = pickPlayer();
-		if(paths[p].id){
+		if(paths[p].id){ // might be buggy
 			countries[paths[p].id][1] = player;
 			players[player]['countriesHeld']++;
 			players[player]['troops']--;
 			addText(paths[p], 1);
 		}	
     }
+<<<<<<< Updated upstream
 	
   // update counter display inside country
 function addText(p, count) {
@@ -127,6 +163,33 @@ function addText(p, count) {
   //picks player1 or player2 at random unless out of troops
 function pickPlayer(){
 	
+=======
+
+	//console.log(players['player1']['countriesHeld']);
+	//console.log("HEYYY" + players['player1']['troops']);
+	//console.log(players['player2']['countriesHeld']);
+	//console.log(players['player2']['troops']);
+	
+  // update counter display inside country
+  function addText(p, count) {
+    var t = document.createElementNS("http://www.w3.org/2000/svg", "text");
+    var b = p.getBBox();
+    t.setAttribute("transform", "translate(" + (b.x + b.width/2) + " " + (b.y + b.height/2) + ")");
+    t.textContent = countries[p.id][2];
+    if (countries[p.id][1] == "player1") {
+    	t.setAttribute("stroke", "blue");
+    }
+    else {
+    	t.setAttribute("stroke", "red");
+    }
+    t.setAttribute("font-size", "20");
+    t.setAttribute("id", p.getAttribute("id")+"text");
+    p.parentNode.insertBefore(t, p.nextSibling);
+  }
+  
+  function pickPlayer(){
+	//picks player1 or player2 at random unless out of troops
+>>>>>>> Stashed changes
 	var num = Math.floor(Math.random() * 2) + 1;
 	if(num == 1 && players['player1']['troops'] > 0)
 		return 'player1';
@@ -137,8 +200,22 @@ function pickPlayer(){
 	else
 		return 'player1';
   }
-}
+} // init
 
 
 
+// increment only
+  function updateText(countryId) {
+  	var c = countries[countryId]; // get country object: name, owner, num of troops
+    document.getElementById(countryId+"text").textContent=c[2]; // update troops number count display on map
+    updateAllTroopCounts();
+  }
 
+  function updateAllTroopCounts() {
+  	console.log("BLAHH");
+  	// both players total troop numbers
+    $("#p1TotalTroops").text(startingTroops);
+    $("#p1TroopsLeft").text(players['player1']['troops']);
+	$("#p2TotalTroops").text(startingTroops);
+	$("#p2TroopsLeft").text(players['player2']['troops']);
+  }
