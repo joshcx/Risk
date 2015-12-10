@@ -1,74 +1,72 @@
-var svg;
-var doc;
-var map;
-var label;
-var text;
-var hilite;
-var countries;
-var seas;
-function init( evt )
+var countries = new Array();
+function init()
 {
-  svg = evt.target;
-  doc = svg.ownerDocument;
-  selected = null;
-  map = doc.getElementById( 'map' );
-  label = newElement( 'text', 'id=label font-size=30 stroke=none fill=black text-insert=middle x=100 y=700' );
-  text = doc.createTextNode( 'Click a country' );
-  label.appendChild( text );
-  svg.appendChild( label );
-  hilite = doc.getElementById( "hilite" );
-  // countries = document.getElementsByClassName('country');
-  var countries = [];
   $(".country").each(function(){
-    $(this).troops = 0;
-    $(this).owner = "None";
-    $(this).on({
-      mouseover: function(){
+    var countryId = this.getAttribute('id');
+    countries[countryId] = new Array();
+    countries[countryId][0] = countryId;
+    countries[countryId][1] = "None";
+    countries[countryId][2] = 0;
+  });
+  $(".country").each(function(){
+    $(this).on({  
+      mouseover: function(e){
+        
+        var countryId = e.target.getAttribute('id');
+
         var d = $(this).attr('d');
         $('#hovering').attr('d', d);
-        $('#status').text($(this).attr('id') + '// Owner: ' + $(this).owner + ' Troops: ' + $(this).troops);
-        
-      }
-    });
-    $('#hovering').click(function(){
-      var d = $(this).attr('d');
-      $('#clicked').attr('d', d);
+        $('#hovering').attr('name', countryId);
+        $('#country2').text(countries[countryId][0] + " | Owner: " + countries[countryId][1] + " | Troops: " + countries[countryId][2]);
+      } 
     });
   });
-  // $('.country').on({
-  //     mouseover: function(){
-  //       var tmp = $(this).attr('d');
-  //       $('#clicked')[0].attr('d', tmp);
-  //       $('#hovering')[0].attr('d', tmp);
-  //     },
-  //     mouseleave: function(){
-  //       $('#hovering').removeAttr('d');
-  //     },
-  //     click: function(){
-  //       $(this).off('mouseleave');
-  //     } 
-  //   });
-  // for (var i = 0; i < countries.length; i++)
-  // {
-  //   country = countries[i];
-  //   country.troops = 0;
-  //   country.owner = 'None';
-  //   country.addEventListener('mousedown', function(evt){ 
-  //     clickCountry(evt);
-  //   });
-  //   country.addEventListener('mouseover', function(evt){
-  //     hoverCountry(evt);
-  //   });
-  // }
-  seas = document.getElementsByClassName('sea');
-  for (var i = 0; i < seas.length; i++)
-  {
-    var sea = seas[i];
-    sea.addEventListener('click', function(evt){ 
-      clickSea(evt);
+  $('#hovering').click(function(e){
+    var countryId = $(this).attr('name');
+    var c = countries[countryId];
+    c[2]++;
+    document.getElementById(countryId+"text").textContent=c[2];
+    var d = $(this).attr('d');
+    $('#clicked').attr('d', d);
+    $('#country1').text(countries[countryId][0] + " | Owner: " + countries[countryId][1] + " | Troops: " + countries[countryId][2]);
+  });
+  $(".sea").each(function(){
+    $(this).click(function(){
+      $('#hovering').removeAttr('d');
+      $('#clicked').removeAttr('d');
+      $('#country1').text("Click on a country");
+      $('#country2').text("Hover on a country");
     });
+  });
+  //  addText for all countries should go here
+    console.log("test");
+    var paths = document.querySelectorAll(".country");
+    for (var p in paths) {
+      addText(paths[p], 1);
+    }
+  // update counter display inside country
+  function addText(p, count) {
+    var t = document.createElementNS("http://www.w3.org/2000/svg", "text");
+    var b = p.getBBox();
+    //b.select(t).remove();
+    //console.log(p.getAttribute('id'));
+    //t.setAttribute("id", p.getAttribute('id'));
+    t.setAttribute("transform", "translate(" + (b.x + b.width/2) + " " + (b.y + b.height/2) + ")");
+    t.textContent = countries[p.id][2];
+    t.setAttribute("stroke", "black");
+    t.setAttribute("font-size", "16");
+    t.setAttribute("id", p.getAttribute("id")+"text");
+
+    // var text = document.createTextNode("Hi");
+    p.parentNode.insertBefore(t, p.nextSibling);
+    //countries[p.getAttribute('id')][3] = t;
+    // b.select(t).remove();
   }
 }
+
+ 
+
+
 // generic function to create an xml element
 // format for attr is very strict
 // attrs is a string of attribute=value pairs separated by single spaces, 
@@ -88,28 +86,5 @@ function newElement( type, attrs )
     }
   }
   return result;
-}
-function clickSea( evt )      
-{
-  var sea = evt.target;
-  text.textContent = sea.getAttribute( 'id' );
-  $('#clicked').attr( 'd', 'm0 0' );
-  selected = null;
-}
-function selectCountry( evt )      
-{
-  var country = evt.target;
-  var outline = country.getAttribute( 'd' );
-  $('#clicked').attr( "d", outline );
-  
-  selected = country;
-}
-function deselectCountry(evt)
-{
-  var country = evt.target;
-  var outline = country.getAttribute( 'd' );
-  $('#clicked').removeAttr( "d" );
-  text.textContent = country.getAttribute( 'id' ) +' Owner: ' +country.owner +' Troops: ' + country.troops;
-  selected = country;
 }
 
