@@ -6,9 +6,11 @@ var gameplay = {
 	totalDeployable: 20
 }
 $('#playButton').click(function(evt){
-	$('#playButton').off();
+	$('#playButton').hide();
+	$('#tutorialButton').hide();
+	$('.countryMsg').show();
 
-	init(evt);
+	init();
 });
 $('.territory').click(function(){
 	if(gameplay.player == "player1"){

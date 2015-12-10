@@ -1,41 +1,36 @@
-
-
-var svg;
-var doc;
-var map;
-var label;
-var text;
-var countries = [];
-function init( evt )
+var countries = new Array();
+function init()
 {
-  svg = evt.target;
-  doc = svg.ownerDocument;
-  selected = null;
-  map = doc.getElementById( 'map' );
+  $(".country").each(function(){
+    var countryId = this.getAttribute('id');
+    countries[countryId] = new Array();
+    countries[countryId][0] = countryId;
+    countries[countryId][1] = "None";
+    countries[countryId][2] = 0;
+  });
   $(".country").each(function(){
     $(this).on({  
       mouseover: function(e){
-        var country = e.target;
-        country.owner = "None";
-        country.troops = 0;
+        var countryId = e.target.getAttribute('id');
         var d = $(this).attr('d');
         $('#hovering').attr('d', d);
-        $('#dataDisplay').text(country.getAttribute('id') + " | Owner: " + country.owner + " | Troops: " + country.troops);
+        $('#country2').text(countries[countryId][0] + " | Owner: " + countries[countryId][1] + " | Troops: " + countries[countryId][2]);
       }
     });
-    $('#hovering').click(function(){
-      var d = $(this).attr('d');
-      $('#clicked').attr('d', d);
-    });
-
   });
-    $(".sea").each(function(){
-      $(this).click(function(){
-        $('#hovering').removeAttr('d');
-        $('#clicked').removeAttr('d');
-      });
-    });
+  $('#hovering').click(function(e){
+    var countryId = e.target.getAttribute('id');
+    var d = $(this).attr('d');
+    $('#clicked').attr('d', d);
+    $('#country1').text(countries[countryId][0] + " | Owner: " + countries[countryId][1] + " | Troops: " + countries[countryId][2]);
+  });
 
+  $(".sea").each(function(){
+    $(this).click(function(){
+      $('#hovering').removeAttr('d');
+      $('#clicked').removeAttr('d');
+    });
+  });
 }
 
 // generic function to create an xml element

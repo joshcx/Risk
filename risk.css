@@ -175,6 +175,10 @@ p,
     top: 89%;
     left: 1.7%;
 }
-#dataDisplay{
+.countryMsg{
     font-size: 3rem;
+    display: none;
+}
+#country2{
+    margin-bottom: 3rem;
 }
