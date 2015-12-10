@@ -32,14 +32,6 @@ function init()
         $('#hovering').attr('d', d);
         $('#hovering').attr('name', countryId);
         $('#country2').text(countries[countryId][0] + " | Owner: " + countries[countryId][1] + " | Troops: " + countries[countryId][2]);
-    		// if(firstCountry){
-    			// $('#attack').removeAttr('d');
-    			// $('#attack').attr('name', countryId);
-    			// $('#country2').text(countries[countryId][0] + " | Owner: " + countries[countryId][1] + " | Troops: " + countries[countryId][2] + " | Attackable: " + attackable(firstCountry, countryId));
-    			// if(attackable(firstCountry, countryId)){
-    			// 	$('#attack').attr('d', d);
-    			// }
-    		// }
       }
     });
   });
@@ -51,7 +43,7 @@ function init()
     // var c = countries[countryId];
     // c[2]++;
     // document.getElementById(countryId+"text").textContent=c[2];
-    
+
     var d = $(this).attr('d');
     $('#clicked').attr('d',d);
   	// if(firstCountry == null){
@@ -68,25 +60,30 @@ function init()
     $('#country1').text(countries[countryId][0] + " | Owner: " + countries[countryId][1] + " | Troops: " + countries[countryId][2]);
   });
   $(".sea").each(function(){
-	$(this).on({  
-    mouseover: function(e){
-		$('#hovering').removeAttr('d');
-		$('#attack').removeAttr('d');
-		$('#country2').text("Hover on a country");
-	}
-	});
+  	$(this).on({  
+        mouseover: function(e){
+  		  $('#hovering').removeAttr('d');
+  		  $('#attack').removeAttr('d');
+  		  $('#country2').text("Hover on a country");
+  	  }
+	  });
     $(this).click(function(){
-		if(secondCountry){
-			secondCountry = null;
-			$('#clicked2').removeAttr('d');
-		}
-		else{
-			firstCountry = null;
-			$('#attack').removeAttr('d');
-			$('#clicked').removeAttr('d');
-			secondCountry = null;
-			$('#clicked2').removeAttr('d');
-		}
+		// if(secondCountry){
+		// 	secondCountry = null;
+		// 	$('#clicked2').removeAttr('d');
+		// }
+		// else{
+		// 	firstCountry = null;
+		// 	$('#attack').removeAttr('d');
+		// 	$('#clicked').removeAttr('d');
+		// 	secondCountry = null;
+		// 	$('#clicked2').removeAttr('d');
+		// }
+    $('.country').removeAttr('fill');
+    $('.country').removeAttr('stroke');
+    $('.country').removeAttr('stroke-width');
+    $('.country').removeClass('attackable');
+      $('#clicked').removeAttr('d');
       $('#hovering').removeAttr('d');
       $('#country1').text("Click on a country");
       $('#country2').text("Hover on a country");

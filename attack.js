@@ -20,7 +20,7 @@ var borders = {
 	'Greenland': ['Northwest Territory' , 'Ontario' , 'Quebec' , 'Iceland' ],
 	'Iceland': ['Greenland' , 'Scandinavia' , 'Great Britain' ],
 	'Scandinavia': ['Iceland' , 'Great Britain' , 'Northern Europe' , 'Ukraine' ],
-	'Ukraine': ['Scandinavia' , 'Northern Europe' , 'Afghanistan' , 'Ural' , 'Middle East' ],
+	'Ukraine': ['Scandinavia' , 'Northern Europe' , 'Afghanistan' , 'Ural' , 'Middle East', 'Southern Europe' ],
 	'Ural': ['Ukraine' , 'Afghanistan' , 'China' , 'Siberia' ],
 	'Siberia': ['Ural' , 'China' , 'Mongolia' , 'Irkutsk' , 'Yakutsk' ],
 	'Yakutsk': ['Siberia' , 'Irkutsk' , 'Kamchatka' ],
@@ -45,9 +45,9 @@ var borders = {
 
 function attackPhase(){
 	$('#hovering').off('click');
-	var turned = false;
+	
 	$('#hovering').click(function(e){
-		// e.preventDefault();
+		e.preventDefault();
 		var countryId = $(this).attr('name');
 		var d = $(this).attr('d');
 
@@ -55,7 +55,8 @@ function attackPhase(){
 		$('#clicked').attr('d', d);
 	  	$('#country1').text(countries[countryId][0] + " | Owner: " + countries[countryId][1] + " | Troops: " + countries[countryId][2]);
 	  	
-	  	lightAttackable(countryId);
+	  	lightAttackable(countryId, countries[countryId][1]);
+
 	});
 }
 
@@ -66,19 +67,32 @@ function attackPhase(){
 // 	return false;
 // }
 
-function attackable(territory){
-	alert(borders[territory]);
-	return borders[territory];
-}
-function lightAttackable(territory){
-	
-	$('.country').removeAttr('fill');
-		$('.country').removeAttr('stroke');
-		$('.country').removeAttr('stroke-width');
-	for(i = 0; i < borders[territory].length; ++i){	
 
-		$('#'+borders[territory][i]).attr('fill', 'red');
-		$('#'+borders[territory][i]).attr('stroke', 'black');
-		$('#'+borders[territory][i]).attr('stroke-width', '8');	
+function lightAttackable(country, owner){
+	// var attackable = new Array();
+
+	$('.country').removeAttr('fill');
+	$('.country').removeAttr('stroke');
+	$('.country').removeAttr('stroke-width');
+	
+	for(i = 0; i < borders[country].length; ++i){	
+		var select = "[id='"+ borders[country][i] +"'";
+		var borderId = borders[country][i];
+		if(owner != countries[borderId][1]){
+			$(select).attr('fill','red');
+			$(select).attr('stroke','black');
+			$(select).attr('stroke-width','8');
+			$(select).addClass("attackable");
+			// attackable.push(borderId);	
+		}
+		else{
+			$(select).attr('fill','white');
+			$(select).attr('stroke','black');
+			$(select).attr('stroke-width','8');	
+		}
 	}
+	// return attackable;
+}
+function canAttack(){
+
 }
