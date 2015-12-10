@@ -1,12 +1,19 @@
 var countries = new Array();
+var players = {};
+var numPlayers = 2;
+var startingTroops = 42; //Must be at least 42 for randomization and even for fairness.
+var firstCountry = null; //for clicked countries
+var secondCountry = null;
 function init()
 {
+	players = {'player1': {'troops': startingTroops/2, 'countriesHeld':0}, 'player2':{'troops': startingTroops/2, 'countriesHeld':0}};
   $(".country").each(function(){
     var countryId = this.getAttribute('id');
+	alert(countryId);
     countries[countryId] = new Array();
     countries[countryId][0] = countryId;
     countries[countryId][1] = "None";
-    countries[countryId][2] = 0;
+    countries[countryId][2] = 1;
   });
   $(".country").each(function(){
     $(this).on({  
@@ -17,23 +24,52 @@ function init()
         var d = $(this).attr('d');
         $('#hovering').attr('d', d);
         $('#hovering').attr('name', countryId);
-        $('#country2').text(countries[countryId][0] + " | Owner: " + countries[countryId][1] + " | Troops: " + countries[countryId][2]);
+		if(firstCountry){
+			$('#country2').text(countries[countryId][0] + " | Owner: " + countries[countryId][1] + " | Troops: " + countries[countryId][2] + " | Attackable: " + attackable(firstCountry, countryId));
+			if(attackable(firstCountry, countryId)){
+				$('#attack').attr('d', d);
+			}
+		}
+		else
+			$('#country2').text(countries[countryId][0] + " | Owner: " + countries[countryId][1] + " | Troops: " + countries[countryId][2]);
       } 
     });
   });
+
   $('#hovering').click(function(e){
     var countryId = $(this).attr('name');
-    var c = countries[countryId];
-    c[2]++;
+	var c = countries[countryId];
+	c[2]++;
     document.getElementById(countryId+"text").textContent=c[2];
     var d = $(this).attr('d');
-    $('#clicked').attr('d', d);
+	if(firstCountry == null){
+		firstCountry = countryId;
+		$('#clicked').attr('d', d);
+	}
+	else{
+		secondCountry = countryId;
+		$('#clicked2').attr('d', d);
+	}
     $('#country1').text(countries[countryId][0] + " | Owner: " + countries[countryId][1] + " | Troops: " + countries[countryId][2]);
   });
   $(".sea").each(function(){
+	$(this).on({  
+    mouseover: function(e){
+		$('#hovering').removeAttr('d');
+		$('#attack').removeAttr('d');
+		$('#country2').text("Hover on a country");
+	}
+	});
     $(this).click(function(){
+	  if(secondCountry){
+		  secondCountry = null;
+		  $('#clicked2').removeAttr('d');
+	  }
+	  else{
+		  firstCountry = null;
+		  $('#clicked').removeAttr('d');
+	  }
       $('#hovering').removeAttr('d');
-      $('#clicked').removeAttr('d');
       $('#country1').text("Click on a country");
       $('#country2').text("Hover on a country");
     });
@@ -42,8 +78,19 @@ function init()
     console.log("test");
     var paths = document.querySelectorAll(".country");
     for (var p in paths) {
-      addText(paths[p], 1);
+		var player = pickPlayer();
+		if(paths[p].id){
+			countries[paths[p].id][1] = player;
+			players[player]['countriesHeld']++;
+			players[player]['troops']--;
+			addText(paths[p], 1);
+		}	
     }
+	//console.log(players['player1']['countriesHeld']);
+	//console.log(players['player1']['troops']);
+	//console.log(players['player2']['countriesHeld']);
+	//console.log(players['player2']['troops']);
+	
   // update counter display inside country
   function addText(p, count) {
     var t = document.createElementNS("http://www.w3.org/2000/svg", "text");
@@ -62,9 +109,20 @@ function init()
     //countries[p.getAttribute('id')][3] = t;
     // b.select(t).remove();
   }
+  
+  function pickPlayer(){
+	//picks player1 or player2 at random unless out of troops
+	var num = Math.floor(Math.random() * 2) + 1;
+	if(num == 1 && players['player1']['troops'] > 0)
+		return 'player1';
+	else if(num == 2 && players['player2']['troops'] > 0)
+		return 'player2';
+	else if(num == 1)
+		return 'player2';
+	else
+		return 'player1';
+  }
 }
-
- 
 
 
 // generic function to create an xml element
@@ -87,4 +145,5 @@ function newElement( type, attrs )
   }
   return result;
 }
+
 

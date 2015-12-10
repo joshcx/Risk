@@ -6,10 +6,10 @@ var borders = {
 	'South Africa': { 'Congo':true, 'East Africa':true, 'Madagascar':true},
 	'Madagascar': {'East Africa':true, 'South Africa':true},
 	'Argentina': {'Peru':true, 'Brazil':true},
-	'Brazil': {'Venezuala':true, 'Peru':true, 'Argentina':true, 'North Africa':true},
-	'Peru': {'Argentina':true, 'Brazil':true, 'Venezuala':true},
-	'Venezuala': {'Peru':true, 'Brazil':true, 'Central America':true},
-	'Central America': {'Venezuala':true, 'Western United States':true, 'Eastern United States':true},
+	'Brazil': {'Venezuela':true, 'Peru':true, 'Argentina':true, 'North Africa':true},
+	'Peru': {'Argentina':true, 'Brazil':true, 'Venezuela':true},
+	'Venezuela': {'Peru':true, 'Brazil':true, 'Central America':true},
+	'Central America': {'Venezuela':true, 'Western United States':true, 'Eastern United States':true},
 	'Western United States': {'Central America':true, 'Eastern United States':true, 'Ontario':true, 'Alberta':true},
 	'Eastern United States': {'Central America':true, 'Western United States':true, 'Ontario':true, 'Quebec':true},
 	'Quebec': {'Eastern United States':true, 'Ontario':true, 'Greenland':true},
@@ -48,3 +48,4 @@ function attackable(attacker, defender){
 	if (borders[attacker][defender])
 		return true;
 	return false;
+}
