@@ -43,8 +43,11 @@ var borders = {
 	'Southern Europe': ['Northern Europe' , 'Western Europe' , 'North Africa' , 'Egypt' , 'Middle East' , 'Ukraine' ]
 };
 
-<<<<<<< Updated upstream
-function attackPhase(){
+function startAttackPhase(){
+    phase="attack";
+    if(turn=="player1")
+        turn="player2";
+    $("#roundInfo").html("Attack Phase for Player "+turn);
 	$('#hovering').off('click');
 	
 	$('#hovering').click(function(e){
@@ -97,11 +100,3 @@ function lightAttackable(country, owner){
 function canAttack(){
 
 }
-=======
-function attackable(attacker, defender){
-//Returns true if country "attacker" borders, or has a connection to, country "defender"
-	if (borders[attacker][defender])
-		return true;
-	return false;
-}
->>>>>>> Stashed changes

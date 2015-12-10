@@ -113,40 +113,24 @@
 <!-- **********************************************    RISK MAP   ***************************************************** *-->
 
         
-<<<<<<< Updated upstream
-        <div class="row" id="gameInterface">
-          <p id = "roundInfo">Default</p>
-          <p id = "country1" class = "countryMsg"> Click on a country </p>
-          <p id = "country2" class = "countryMsg"> Hover on a country </p>
+        <div id="gameInterface">
+        <div class="row">
+          <p id = "roundInfo" class=" col-xs-9">Default</p>
+          <button id="topBtn" class="btn-default">+</button>
+        </div>
+        <div class="row">
+          <p id = "country1" class = "countryMsg col-xs-9"> Click on a country </p>
+          <button id="botBtn" class="btn-default">-</button>
+        </div>
+        <div class="row">
+          <p id = "country2" class = "countryMsg col-xs-9"> Hover on a country </p>
+          <button id="nextBtn" class="btn-default">Next Phase</button>
+        </div>
         </div>
         <div class="row" id="btn-container">
           <button id="playButton" class="btn btn-default btn-lg">Play</button>
           <button id="tutorialButton" class="btn btn-default btn-lg" data-toggle="modal" data-target="#tutorialModal">Tutorial</button>
-=======
-        <div class="row">
-          
-          <h4 id="p1Text" class="pText">Player1 Total Troops: </h4>
-          <h4 id="p1TotalTroops" class="pText"></h4>
-          <h4 id="p1Text2" class="pText">Player1 Reinforcement Troops Left: </h4>
-          <h4 id="p1TroopsLeft" class="pText"></h4>
-          <h4 id="p2Text" class="pText">Player2 Total Troops: </h4>
-          <h4 id="p2TotalTroops" class="pText"></h4>
-          <h4 id="p2Text2" class="pText">Player2 Reinforcement Troops Left: </h4>
-          <h4 id="p2TroopsLeft" class="pText"></h4>
-
-          <span id="plusButton" class="glyphicon glyphicon-plus icon"></span>
-            <span id="minusButton" class="glyphicon glyphicon-minus icon"></span>
-            <span id="nextButton" class="glyphicon glyphicon-ok icon"></span>
-            <div class="btn-container col-xs-12">
-              
-              <button id="playButton" class="btn btn-default btn-lg">Play</button>
-              <button id="tutorialButton" class="btn btn-default btn-lg" data-toggle="modal" data-target="#tutorialModal">Tutorial</button>
-
-            <p id = "country1" class = "countryMsg"> Click on a country </p>
-            <p id = "country2" class = "countryMsg"> Hover on a country </p>  
           </div>
->>>>>>> Stashed changes
-        </div>
         
 
 <!-- **********************************************    TUTORIAL MODAL   ***************************************************** *-->        
@@ -172,11 +156,8 @@
     <script src="map.js"></script>
     <script src="battle.js"></script>
 	<script src="attack.js"></script>
-<<<<<<< Updated upstream
-    <script src="deploy.js"></script>
-=======
     <script src="reinforce.js"></script>
     <script src="fortify.js"></script>
->>>>>>> Stashed changes
+    <script src="deploy.js"></script>
   </body>
 </html>
