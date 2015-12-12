@@ -45,8 +45,7 @@ var borders = {
 
 function startAttackPhase(){
     phase="attack";
-    if(turn=="player1")
-        turn="player2";
+    $(".troopBtn").hide();
     $("#roundInfo").html("Attack Phase for Player "+turn);
 	$('#hovering').off('click');
 	

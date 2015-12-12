@@ -25,3 +25,27 @@ function reinforceTroops (turn, countryId) {
 	}
 	else alert("That's not your territory!");
 }
+
+function setMoveListeners(){
+  $(".country").each(function(){
+    $(this).on({  
+      mouseover: function(e){
+     
+        var countryId = e.target.getAttribute('id');
+        var d = $(this).attr('d');
+        $('#hovering').attr('d', d);
+        $('#hovering').attr('name', countryId);
+        $('#country2').text(countries[countryId][0] + " | Owner: " + countries[countryId][1] + " | Troops: " + countries[countryId][2]);
+      }
+    });
+  });
+
+  $('#hovering').click(function(e){
+    var countryId = $(this).attr('name'); // get country name
+	
+    var d = $(this).attr('d');
+    $('#clicked').attr('d',d);
+    clicked = countryId;
+    $('#country1').text(countries[countryId][0] + " | Owner: " + countries[countryId][1] + " | Troops: " + countries[countryId][2]);
+  });
+}

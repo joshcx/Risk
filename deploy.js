@@ -1,28 +1,38 @@
+function startReinforcePhase(){
+    var name = "Player 1";
+    if(turn=="player2")
+        name = "Player 2";
+    $('#roundInfo').text("Reinforce Phase for "+name);
+    $("#troopInfo").html("Troops remaining: <span id='numTroops'>"+ players[turn]["troops"] + "</span>");
+}
+
 $('#playButton').click(function(evt){
 	$('#btn-container').hide();
     $('#gameInterface').show();
-    $('#roundInfo').text("Reinforce Phase for Player 1");
 	$(".pText").show();
 	$(".icon").show();
 	init();
     turn = "player1";
-    $("#country2").attr("id", "troopInfo");
-    console.log(players);
-    $("#troopInfo").html("Troops remaining: <span id='numTroops'>"+ players["player1"]["troops"] + "</span>");
-});
 
-$('#topBtn').click(function(evt){
-    reinforceTroops(turn, clicked);
-    $('#numTroops').html(players[turn]["troops"]);
-});
+    $('#topBtn').click(function(evt){
+        reinforceTroops(turn, clicked);
+        $('#numTroops').html(players[turn]["troops"]);
+    });
 
-$('#botBtn').click(function(evt){
-   fortifyTroops(turn, clicked, "minus"); 
-    $('#numTroops').html(players[turn]["troops"]);
+    $('#botBtn').click(function(evt){
+       fortifyTroops(turn, clicked, "minus"); 
+        $('#numTroops').html(players[turn]["troops"]);
+    });
+
+    startReinforcePhase();    
 });
 
 $('#nextBtn').click(function(evt){
-    if(phase=="reinforce"){
+    var name = "Player 1";
+    if(turn=="player2")
+        name = "Player 2";
+
+    if(phase=="start"){
         if(players[turn]["troops"]>0)
             alert('Must place all troops first');
         else if(turn=="player2"){
@@ -31,16 +41,30 @@ $('#nextBtn').click(function(evt){
         }
         else{
             turn="player2";
+            $('#numTroops').html(players[turn]["troops"]);
             $('#roundInfo').html("Reinforce Phase for Player 2");
         }
     }
-    if(phase=="attack"){
-        if(player=="player1"){
-            player="player2";
+    else if(phase=="reinforce"){
+        if(players[turn]["troops"]>0)
+            alert('Must place all troops first');
+        else{
             startAttackPhase();
         }
+        
+    }
+    else if(phase=="attack"){
+        startMovePhase();
+    }
+    else if(phase=="move"){
+
+        if(turn=="player1")
+            turn="player2"
         else
-            phase="fortify";
-            player="player1";
+            turn="player1"
+
+        players[turn]["troops"] = 10;
+        phase="reinforce";
+        startReinforcePhase();
     }
 });

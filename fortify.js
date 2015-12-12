@@ -38,3 +38,13 @@ function fortifyTroops(turn, countryId, buttonSign) {
 	}
 	else alert("That's not your territory!");
 }
+
+function startMovePhase(){
+    phase="move";
+    $(".troopBtn").show();
+    var name = "Player 1";
+    if(turn=="player2")
+        name = "Player 2";
+    $('#roundInfo').text("Move Phase for "+name);
+    setMoveListeners();
+}

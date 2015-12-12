@@ -8,7 +8,7 @@ var secondCountry = null;
 var turn;
 var count;
 var clicked;
-var phase="reinforce";
+var phase="start";
 
 function init()
 {
@@ -16,44 +16,22 @@ function init()
 	turn = "player1"; // remove later: testing purposes
 	count = 0; // remove later: testing purposes
 
-	updateAllTroopCounts();
 
   $(".country").each(function(){
     var countryId = this.getAttribute('id');
-	//alert(countryId);
     countries[countryId] = new Array();
     countries[countryId][0] = countryId; // country name
     countries[countryId][1] = "None"; // owner of country
     countries[countryId][2] = 1; // num of troops
   });
 
-  $(".country").each(function(){
-    $(this).on({  
-      mouseover: function(e){
-     
-        var countryId = e.target.getAttribute('id');
-        var d = $(this).attr('d');
-        $('#hovering').attr('d', d);
-        $('#hovering').attr('name', countryId);
-        $('#country2').text(countries[countryId][0] + " | Owner: " + countries[countryId][1] + " | Troops: " + countries[countryId][2]);
-      }
-    });
-  });
+  setMoveListeners();
   
-  $('#hovering').click(function(e){
-    var countryId = $(this).attr('name'); // get country name
-	
-    var d = $(this).attr('d');
-    $('#clicked').attr('d',d);
-    clicked = countryId;
-    $('#country1').text(countries[countryId][0] + " | Owner: " + countries[countryId][1] + " | Troops: " + countries[countryId][2]);
-  });
   $(".sea").each(function(){
   	$(this).on({  
         mouseover: function(e){
   		  $('#hovering').removeAttr('d');
   		  $('#attack').removeAttr('d');
-  		  $('#country2').text("Hover on a country");
   	  }
 	  });
     $(this).click(function(){
@@ -64,7 +42,6 @@ function init()
       $('#clicked').removeAttr('d');
       $('#hovering').removeAttr('d');
       $('#country1').text("Click on a country");
-      $('#country2').text("Hover on a country");
     });
   });
  
@@ -126,14 +103,4 @@ function init()
   function updateText(countryId) {
   	var c = countries[countryId]; // get country object: name, owner, num of troops
     document.getElementById(countryId+"text").textContent=c[2]; // update troops number count display on map
-    updateAllTroopCounts();
-  }
-
-  function updateAllTroopCounts() {
-  	console.log("BLAHH");
-  	// both players total troop numbers
-    $("#p1TotalTroops").text(startingTroops);
-    $("#p1TroopsLeft").text(players['player1']['troops']);
-	$("#p2TotalTroops").text(startingTroops);
-	$("#p2TroopsLeft").text(players['player2']['troops']);
   }
