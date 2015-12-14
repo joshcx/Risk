@@ -73,16 +73,15 @@ function startAttackPhase(){
 
 function lightAttackable(country, owner){
 	// var attackable = new Array();
-
-	$('.country').removeAttr('fill');
-	$('.country').removeAttr('stroke');
-	$('.country').removeAttr('stroke-width');
+	
+	unLightAttackable();
 	
 	for(i = 0; i < borders[country].length; ++i){	
 		var select = "[id='"+ borders[country][i] +"'";
 		var borderId = borders[country][i];
 		if(owner != countries[borderId][1]){
 			$(select).attr('fill','red');
+			$(select).attr('opacity','0.5');
 			$(select).attr('stroke','black');
 			$(select).attr('stroke-width','8');
 			$(select).addClass("attackable");
@@ -91,11 +90,21 @@ function lightAttackable(country, owner){
 		else{
 			$(select).attr('fill','white');
 			$(select).attr('stroke','black');
+			$(select).attr('opacity','0.5');
 			$(select).attr('stroke-width','8');	
 		}
 	}
 	// return attackable;
 }
+
+function unLightAttackable(){
+	$('.country').removeAttr('fill');
+	$('.country').removeAttr('stroke');
+	$('.country').removeAttr('opacity');
+	$('.country').removeAttr('stroke-width');
+	$('.country').removeClass('attackable');
+}
+
 function canAttack(){
 
 }

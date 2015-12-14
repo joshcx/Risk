@@ -40,6 +40,7 @@ function fortifyTroops(turn, countryId, buttonSign) {
 }
 
 function startMovePhase(){
+	unLightAttackable();
     phase="move";
     $(".troopBtn").show();
     var name = "Player 1";

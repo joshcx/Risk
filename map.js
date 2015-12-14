@@ -35,13 +35,15 @@ function init()
   	  }
 	  });
     $(this).click(function(){
-    $('.country').removeAttr('fill');
-    $('.country').removeAttr('stroke');
-    $('.country').removeAttr('stroke-width');
-    $('.country').removeClass('attackable');
+    //$('.country').removeAttr('fill');
+    //$('.country').removeAttr('stroke');
+    //$('.country').removeAttr('stroke-width');
+    //$('.country').removeClass('attackable');
+	unLightAttackable();
       $('#clicked').removeAttr('d');
       $('#hovering').removeAttr('d');
       $('#country1').text("Click on a country");
+	  clicked = null;
     });
   });
  
