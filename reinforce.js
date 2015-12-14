@@ -12,15 +12,16 @@ function reinforceTroops (turn, countryId) {
 				}
 				players['player1']['troops']--;
 				countries[countryId][2]++;
-				console.log("Remaining number of troops: " + players['player1']['troops'])
+				console.log("Remaining number of troops: " + players['player1']['troops']);
 			}
 			else {
 				if (players['player2']['troops'] == 0) {
 					alert("You're out of troops!")
 					return;
-			}
+				}
 				players['player2']['troops']--;
 				countries[countryId][2]++;
+				console.log("Remaining number of troops: " + players['player2']['troops'])
 			}
 			updateText(countryId);
 		}

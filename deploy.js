@@ -19,7 +19,7 @@ $('#playButton').click(function(evt){
     turn = "player1";
 
     $('#topBtn').click(function(evt){
-        reinforceTroops(turn, clicked);
+        fortifyTroops(turn, clicked, "plus");
         $('#numTroops').html(players[turn]["troops"]);
     });
 
@@ -62,21 +62,27 @@ $('#nextBtn').click(function(evt){
     }
     else if(phase=="move"){
 
-        if(turn=="player1")
-            turn="player2"
-        else
-            turn="player1"
-		
-		//stops player 2 from getting extra troops on first round
-		if(!firstTurn){
-			players[turn]["troops"] = calcReinforcements(turn);
-			phase="reinforce";
-			startReinforcePhase();
-		}
-		else{
-			startAttackPhase();
-			firstTurn = false;
-		}
+        if(players[turn]["troops"] > 0)
+            alert("You have troops waiting to be moved");
+        else{
+            if(turn=="player1")
+                turn="player2"
+            else
+                turn="player1"
+        
+            //stops player 2 from getting extra troops on first round
+            if(!firstTurn){
+                players[turn]["troops"] = calcReinforcements(turn);
+                phase="reinforce";
+                startReinforcePhase();
+            }
+            else{
+                startAttackPhase();
+                firstTurn = false;
+            }
+        }
+
+        
     }
 });
 
