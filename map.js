@@ -1,6 +1,7 @@
 var countries = new Array();
 
 var players = {};
+var victoryCount = 10;//game ends when one player only holds 10 territories
 var numPlayers = 2; 
 var startingTroops = 42; //Must be at least 42 for randomization and even for fairness.
 var firstCountry = null; //for clicked countries

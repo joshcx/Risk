@@ -212,12 +212,22 @@ function attack(attacker, defender){
 				players['player2']['countriesHeld']--;
 				players['player1']['countriesHeld']++;
 				document.getElementById(defender+"text").setAttribute("stroke", "blue");
+				if(players['player2']['countriesHeld'] <= victoryCount){//victory condition
+					alert(turn + " wins the game!");
+					window.location.reload();
+				}
 			}
 			else{
 				players['player1']['countriesHeld']--;
 				players['player2']['countriesHeld']++;
 				document.getElementById(defender+"text").setAttribute("stroke", "red");
+				if(players['player1']['countriesHeld'] <= victoryCount){//victory condition
+					alert(turn + " wins the game!");
+					window.location.reload();
+				}
 			}
+			
+			
 		}
 		updateText(attacker);
 		updateText(defender);
