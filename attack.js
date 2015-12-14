@@ -221,6 +221,7 @@ function attack(attacker, defender){
 		}
 		updateText(attacker);
 		updateText(defender);
+		checkWinner();
 		$('#country1').text(countries[clicked1][0] + " | Owner: " + countries[clicked1][1] + " | Troops: " + countries[clicked1][2]);
 	}
 	else{
@@ -230,4 +231,26 @@ function attack(attacker, defender){
 
 function rollDice(){
 	return Math.floor(Math.random() * 6) + 1;
+}
+
+function checkWinner(){
+	var p1Count = 0;
+	var p2Count = 0;
+	$('.country').each(function(){
+		var countryId = this.getAttribute('id');
+		
+		if(countries[countryId][1] == "player1"){
+			p1Count++;
+		}
+		else{
+			p2Count++;
+		}
+	});
+	alert(p1Count + "       " + p2Count);
+	if(p1Count == 0){
+		alert("player 2 has won!");
+	}
+	else if(p2Count == 0){
+		alert("player 1 has won!");
+	}
 }
