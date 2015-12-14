@@ -37,9 +37,12 @@ function fortifyTroops(turn, countryId, buttonSign) {
 		updateText(countryId);
 	}
 	else alert("That's not your territory!");
+	 $('#country1').text(countries[countryId][0] + " | Owner: " + countries[countryId][1] + " | Troops: " + countries[countryId][2]);
 }
 
 function startMovePhase(){
+	$('#clicked').removeAttr('d');
+    $('#hovering').removeAttr('d');
 	unLightAttackable();
     phase="move";
     $(".troopBtn").show();

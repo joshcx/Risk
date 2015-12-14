@@ -43,38 +43,48 @@ var borders = {
 	'Southern Europe': ['Northern Europe' , 'Western Europe' , 'North Africa' , 'Egypt' , 'Middle East' , 'Ukraine' ]
 };
 
+var clicked1;
+var clicked2;
+
 function startAttackPhase(){
     phase="attack";
+	$('#clicked').removeAttr('d');
+    $('#hovering').removeAttr('d');
     $(".troopBtn").hide();
     $("#roundInfo").html("Attack Phase for Player "+turn);
 	$('#hovering').off('click');
 	
 	$('#hovering').click(function(e){
 		e.preventDefault();
-		var countryId = $(this).attr('name');
-		var d = $(this).attr('d');
-
-		
-		$('#clicked').attr('d', d);
-	  	$('#country1').text(countries[countryId][0] + " | Owner: " + countries[countryId][1] + " | Troops: " + countries[countryId][2]);
-	  	
-	  	lightAttackable(countryId, countries[countryId][1]);
-
+		if(phase == 'attack'){
+			var d = $(this).attr('d');
+			tempId = $(this).attr('name');
+			if(clicked1 && canAttack(clicked1, tempId)){
+				alert("wee");
+				clicked2 = tempId;
+				attack(clicked1, clicked2);
+			}
+			else if(clicked1 && !sameOwner(clicked1, tempId))
+				alert("Too far away to attack");
+			else if (countries[tempId][1] == turn){ 
+				clicked1 = tempId;
+				$('#clicked').attr('d', d);
+				$('#country1').text(countries[clicked1][0] + " | Owner: " + countries[clicked1][1] + " | Troops: " + countries[clicked1][2]);
+				lightAttackable(clicked1, countries[clicked1][1]);
+			}
+			else{
+				alert("You must click a territory that you own!");
+			}
+		alert("clicked1= "+clicked1 +" clicked2= "+clicked2);
+		}
 	});
 }
-
-// function attackable(attacker, defender){
-// //Returns true if country "attacker" borders, or has a connection to, country "defender"
-// 	if (borders[attacker][defender])
-// 		return true;
-// 	return false;
-// }
 
 
 function lightAttackable(country, owner){
 	// var attackable = new Array();
 	
-	unLightAttackable();
+	unLightAttackable(false);
 	
 	for(i = 0; i < borders[country].length; ++i){	
 		var select = "[id='"+ borders[country][i] +"'";
@@ -94,17 +104,56 @@ function lightAttackable(country, owner){
 			$(select).attr('stroke-width','8');	
 		}
 	}
-	// return attackable;
 }
 
-function unLightAttackable(){
-	$('.country').removeAttr('fill');
-	$('.country').removeAttr('stroke');
-	$('.country').removeAttr('opacity');
-	$('.country').removeAttr('stroke-width');
-	$('.country').removeClass('attackable');
+function unLightAttackable(sea){
+	if(clicked2 && !clicked1){
+		clicked2 = null;
+	}
+	if((clicked1 && clicked2) || (clicked1 && countries[clicked1][1] == turn)){
+		$('.country').removeAttr('fill');
+		$('.country').removeAttr('stroke');
+		$('.country').removeAttr('opacity');
+		$('.country').removeAttr('stroke-width');
+		$('.country').removeClass('attackable');
+		clicked2 = null;
+	}
+		if(sea){
+		$('.country').removeAttr('fill');
+		$('.country').removeAttr('stroke');
+		$('.country').removeAttr('opacity');
+		$('.country').removeAttr('stroke-width');
+		$('.country').removeClass('attackable');
+		clicked1 = null;
+		clicked2 = null;
+	}
 }
 
-function canAttack(){
+function canAttack(attacker, defender){
+	if (haveBorder(attacker, defender)){
+		if (!sameOwner(attacker, defender)){
+			return true;
+		}
+	}
+	return false;
+}
 
+function haveBorder(cid1, cid2){
+	for(i = 0; i < borders[cid1].length; ++i){
+		if(borders[cid1][i] == cid2)
+			return true;
+	}
+	return false;
+}
+
+function sameOwner(cid1, cid2){
+	if(countries[cid1][1] == countries[cid2][1])
+		return true;
+	return false;	
+}
+	
+function attack(attacker, defender){
+	if(canAttack(attacker, defender)){
+		alert(attacker + " is attacking " + defender );
+	}
 }

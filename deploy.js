@@ -1,4 +1,8 @@
+var firstTurn = true;
+
 function startReinforcePhase(){
+	$('#clicked').removeAttr('d');
+    $('#hovering').removeAttr('d');
     var name = "Player 1";
     if(turn=="player2")
         name = "Player 2";
@@ -62,9 +66,16 @@ $('#nextBtn').click(function(evt){
             turn="player2"
         else
             turn="player1"
-
-        players[turn]["troops"] = 10;
-        phase="reinforce";
-        startReinforcePhase();
+		
+		//stops player 2 from getting extra troops on first round
+		if(!firstTurn){
+			players[turn]["troops"] = 10;
+			phase="reinforce";
+			startReinforcePhase();
+		}
+		else{
+			startAttackPhase();
+			firstTurn = false;
+		}
     }
 });

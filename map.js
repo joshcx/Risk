@@ -15,6 +15,9 @@ function init()
 	players = {'player1': {'troops': startingTroops, 'countriesHeld':0}, 'player2':{'troops': startingTroops, 'countriesHeld':0}};
 	turn = "player1"; // remove later: testing purposes
 	count = 0; // remove later: testing purposes
+	
+	clicked1 = null;
+	clicked2 = null;
 
 
   $(".country").each(function(){
@@ -39,7 +42,8 @@ function init()
     //$('.country').removeAttr('stroke');
     //$('.country').removeAttr('stroke-width');
     //$('.country').removeClass('attackable');
-	unLightAttackable();
+	unLightAttackable(true);
+	
       $('#clicked').removeAttr('d');
       $('#hovering').removeAttr('d');
       $('#country1').text("Click on a country");
