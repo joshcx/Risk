@@ -69,7 +69,7 @@ $('#nextBtn').click(function(evt){
 		
 		//stops player 2 from getting extra troops on first round
 		if(!firstTurn){
-			players[turn]["troops"] = 10;
+			players[turn]["troops"] = calcReinforcements(turn);
 			phase="reinforce";
 			startReinforcePhase();
 		}
@@ -79,3 +79,11 @@ $('#nextBtn').click(function(evt){
 		}
     }
 });
+
+function calcReinforcements(player){
+	// based on risk rules without cards or continents
+	var temp = Math.floor(players[player]['countriesHeld'] / 3);
+	if(temp < 3)
+		temp = 3;
+	return temp;
+}

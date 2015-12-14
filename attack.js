@@ -47,6 +47,7 @@ var clicked1;
 var clicked2;
 
 function startAttackPhase(){
+	unLightAttackable(true);
     phase="attack";
 	$('#clicked').removeAttr('d');
     $('#hovering').removeAttr('d');
@@ -60,7 +61,6 @@ function startAttackPhase(){
 			var d = $(this).attr('d');
 			tempId = $(this).attr('name');
 			if(clicked1 && canAttack(clicked1, tempId)){
-				alert("wee");
 				clicked2 = tempId;
 				attack(clicked1, clicked2);
 			}
@@ -75,11 +75,9 @@ function startAttackPhase(){
 			else{
 				alert("You must click a territory that you own!");
 			}
-		alert("clicked1= "+clicked1 +" clicked2= "+clicked2);
 		}
 	});
 }
-
 
 function lightAttackable(country, owner){
 	// var attackable = new Array();
@@ -153,7 +151,83 @@ function sameOwner(cid1, cid2){
 }
 	
 function attack(attacker, defender){
-	if(canAttack(attacker, defender)){
-		alert(attacker + " is attacking " + defender );
+//currently attacks until either the territory is taken
+// or all but one attacking troop is destroyed
+	if(canAttack(attacker, defender) && countries[attacker][2] > 1){
+		console.log(attacker + " is attacking " + defender );
+		while(countries[attacker][2] > 1 && countries[defender][2] > 0){
+			var attackerDice = [];
+			var defenderDice = [];
+			var attCount = countries[attacker][2];
+			var defCount = countries[defender][2];
+			if(attCount >= 4)
+				attCount = 3;
+			if(defCount >= 2)
+				defCount = 2;
+			for( i = 3; i > 0; i-- ){
+				if(attCount > 0){
+					attackerDice.push(rollDice());
+					attCount--;
+				}
+				if(defCount > 0){
+					defenderDice.push(rollDice());
+					defCount--;
+				}
+			}
+
+			//gets rid of extra dice after rolling in preparation for comparison
+			attackerDice.sort(function(a, b){return b-a});
+			defenderDice.sort(function(a, b){return b-a});
+			while(attackerDice.length > defenderDice.length){
+				attackerDice.pop();
+			}
+			while(defenderDice.length > attackerDice.length){
+				defenderDice.pop();
+			}
+			console.log("attacker rolls: " + attackerDice + " defender rolls: " + defenderDice);
+		
+			for ( i = 0; i < attackerDice.length; ++i ){
+				if(defenderDice.length > 0){
+					if(attackerDice[i] > defenderDice[0]){
+						countries[defender][2]--;
+					}
+					else{
+						countries[attacker][2]--;
+					}
+					defenderDice.shift();//just pop_front()
+				}
+				else{
+					countries[defender][2]--;
+				}
+			}
+		}
+			
+		if(countries[defender][2] <= 0){//handles change of ownership
+			//this moves all but 1 surviving attacking troop to the conquered territory
+			countries[defender][1] = countries[attacker][1];
+			countries[defender][2] = countries[attacker][2] - 1;
+			countries[attacker][2] = 1;
+				
+			if(turn == 'player1'){
+				players['player2']['countriesHeld']--;
+				players['player1']['countriesHeld']++;
+				document.getElementById(defender+"text").setAttribute("stroke", "blue");
+			}
+			else{
+				players['player1']['countriesHeld']--;
+				players['player2']['countriesHeld']++;
+				document.getElementById(defender+"text").setAttribute("stroke", "red");
+			}
+		}
+		updateText(attacker);
+		updateText(defender);
+		$('#country1').text(countries[clicked1][0] + " | Owner: " + countries[clicked1][1] + " | Troops: " + countries[clicked1][2]);
 	}
+	else{
+		alert("You must leave 1 set of troops behind to defend!")
+	}
+}
+
+function rollDice(){
+	return Math.floor(Math.random() * 6) + 1;
 }

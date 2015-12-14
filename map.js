@@ -12,8 +12,11 @@ var phase="start";
 
 function init()
 {
-	players = {'player1': {'troops': startingTroops, 'countriesHeld':0}, 'player2':{'troops': startingTroops, 'countriesHeld':0}};
-	turn = "player1"; // remove later: testing purposes
+	// startingTroops/2 allows for each player to have exactly 21 of the territories
+	// must remain this way for current pickPlayers() to distribute them evenly
+	// more troops added later for first round
+	players = {'player1': {'troops': startingTroops/2, 'countriesHeld':0}, 'player2':{'troops': startingTroops/2, 'countriesHeld':0}};
+	turn = "player1"; 
 	count = 0; // remove later: testing purposes
 	
 	clicked1 = null;
@@ -63,15 +66,22 @@ function init()
   
   //  addText for all countries
     var paths = document.querySelectorAll(".country");
+	var tcount = 0;
     for (var p in paths) {
 		var player = pickPlayer();
-		if(paths[p].id){ // might be buggy
+		if(paths[p].id){ //player troops need to reach 0 for pickPlayer() to distribute them evenly
 			countries[paths[p].id][1] = player;
 			players[player]['countriesHeld']++;
 			players[player]['troops']--;
 			addText(paths[p], 1);
+			tcount++;
 		}	
     }
+	//players should both have 0 troops now, with evenly distributed territories
+	//give them each more troops here for first reinforce phase
+	players['player1']['troops'] = 10;//startingTroops/2;
+	players['player2']['troops'] = 10;//startingTroops/2;
+	
 
   function addText(p, count) {
     var t = document.createElementNS("http://www.w3.org/2000/svg", "text");

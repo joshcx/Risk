@@ -1,7 +1,7 @@
 // keep calling this function until player runs out of troops
 function reinforceTroops (turn, countryId) { 
-	console.log("Arrived to reinforceTroops!");
-	console.log(players['player1']['troops']);
+	//console.log("Arrived to reinforceTroops!");
+	//console.log(players['player1']['troops']);
 	if(countryId){
 		if (turn == countries[countryId][1]) {
 			// if troops != 0
