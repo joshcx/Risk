@@ -140,8 +140,12 @@ p,
 
 
 
-#titleBanner h1{
-    text-align: center;
+#buttonBanner{
+    margin-top: 20px;
+    text-align: right;
+}
+#statButton{
+    display:none;
 }
 .message{
     font-weight: bold;
@@ -216,19 +220,6 @@ p,
 #p2TroopsLeft {
     top:58%;
     left:21%;
-}
-
-.glyphicon-plus{
-    top: 63%;
-    left: 2%;
-}
-.glyphicon-minus{
-    top: 70%;
-    left: 1.7%;
-}
-.glyphicon-ok{
-    top: 77%;
-    left: 2%;
 }
 .countryMsg{
     font-size: 2rem;

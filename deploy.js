@@ -11,7 +11,8 @@ function startReinforcePhase(){
 }
 
 $('#playButton').click(function(evt){
-	$('#btn-container').hide();
+	$('#playButton').hide();
+    $('#statButton').show();
     $('#gameInterface').show();
 	$(".pText").show();
 	$(".icon").show();
@@ -27,6 +28,30 @@ $('#playButton').click(function(evt){
        fortifyTroops(turn, clicked, "minus"); 
         $('#numTroops').html(players[turn]["troops"]);
     });
+    $('#statButton').click(function(){
+        var p1Territories = 0;
+          var p2Territories = 0;
+          var p1Troops = 0;
+          var p2Troops = 0; 
+          $('.country').each(function(){
+            var countryId = this.getAttribute('id');
+            if(countries[countryId][1] == "player1"){
+              p1Territories++;
+              p1Troops += countries[countryId][2];
+            }
+            else{
+              p2Territories++;
+              p2Troops += countries[countryId][2];
+            }
+          });
+          // console.log($('.test')[0]);
+          $($('.stat1 span')[0]).text(p1Territories);
+          $($('.stat1 span')[1]).text(p1Troops);
+          $($('.stat2 span')[0]).text(p2Territories);
+          $($('.stat2 span')[1]).text(p2Troops);
+          
+    });
+
 
     startReinforcePhase();    
 });
