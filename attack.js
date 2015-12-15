@@ -51,8 +51,20 @@ function startAttackPhase(){
     phase="attack";
 	$('#clicked').removeAttr('d');
     $('#hovering').removeAttr('d');
+	$('#country1').text("Click on a country");
     $(".troopBtn").hide();
-    $("#roundInfo").html("Attack Phase for Player "+turn);
+	var text;
+	var color;
+	if(turn == 'player1'){
+		text = "Attack Phase for Player1";
+		color = 'blue';
+	}
+	else{
+		text = "Attack Phase for Player2";
+		color = 'red';
+	}
+    $("#roundInfo").html(text);
+	$('#roundInfo').css('color',color);
 	$('#hovering').off('click');
 	
 	$('#hovering').click(function(e){

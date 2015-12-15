@@ -42,6 +42,7 @@ function fortifyTroops(turn, countryId, buttonSign) {
 function startMovePhase(){
 	$('#clicked').removeAttr('d');
     $('#hovering').removeAttr('d');
+	$('#country1').text("Click on a country");
 	unLightAttackable();
     phase="move";
     $(".troopBtn").show();

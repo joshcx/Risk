@@ -3,10 +3,15 @@ var firstTurn = true;
 function startReinforcePhase(){
 	$('#clicked').removeAttr('d');
     $('#hovering').removeAttr('d');
+	$('#country1').text("Click on a country");
     var name = "Player 1";
-    if(turn=="player2")
+	var color = 'blue';
+    if(turn=="player2"){
         name = "Player 2";
+		color ='red';
+	}
     $('#roundInfo').text("Reinforce Phase for "+name);
+	$('#roundInfo').css('color',color);
     $("#troopInfo").html("Troops remaining: <span id='numTroops'>"+ players[turn]["troops"] + "</span>");
 }
 
@@ -72,6 +77,7 @@ $('#nextBtn').click(function(evt){
             turn="player2";
             $('#numTroops').html(players[turn]["troops"]);
             $('#roundInfo').html("Reinforce Phase for Player 2");
+			$('#roundInfo').css('color','red');
         }
     }
     else if(phase=="reinforce"){
