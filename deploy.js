@@ -50,10 +50,10 @@ $('#playButton').click(function(evt){
             }
           });
           // console.log($('.test')[0]);
-          $($('.stat1 span')[0]).text(p1Territories);
-          $($('.stat1 span')[1]).text(p1Troops);
-          $($('.stat2 span')[0]).text(p2Territories);
-          $($('.stat2 span')[1]).text(p2Troops);
+          $($('.p1stat')[0]).text(p1Territories);
+          $($('.p1stat')[1]).text(p1Troops);
+          $($('.p2stat')[0]).text(p2Territories);
+          $($('.p2stat')[1]).text(p2Troops);
           
     });
 
