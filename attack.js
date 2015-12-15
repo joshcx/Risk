@@ -239,7 +239,7 @@ function attack(attacker, defender){
 				}
 			}
 			
-			
+			lightAttackable(attacker, turn);
 		}
 		updateText(attacker);
 		updateText(defender);
